@@ -14,7 +14,7 @@ function displayLocation(position){
   var ourCoords={latitude:47.624851,longitude:-122.52099};
   var km=computeDistance(position.coords,ourCoords);
   var dis=document.getElementById('distance');
-  dis.innerHTML='You are '+km+' km form the WickedlySmart HQ';
+  dis.innerHTML='You are '+km+' km from the WickedlySmart HQ';
 }
 function displayError(error){
   var errorTypes={
@@ -41,7 +41,7 @@ function computeDistance(startCoords,destCoords){
                          Math.cos(startLongRads-destLongRads))*Radius;
   return distance;
 }
-function degressdToRadians(degrees){
+function degreesToRadians(degrees){
   var radians=(degrees*Math.PI)/180;
   return radians;
 }
