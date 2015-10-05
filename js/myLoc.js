@@ -11,6 +11,10 @@ function displayLocation(position){
   var longitude=position.coords.longitude;  //从positon.coords对象得到经度
   var loc=document.getElementById('location');
   loc.innerHTML='you are at latitude:'+latitude+',longitude:'+longitude;
+  var ourCoords={latitude:47.624851,longitude:-122.52099};
+  var km=computeDistance(position.coords, ourCoords);
+  var dis=document.getElementById{'distance'};
+  dis.innerHTML='You are'+km+'km form the WickedlySmart HQ';
 }
 function displayError(error){
   var errorTypes={
@@ -25,4 +29,19 @@ function displayError(error){
   }
   var loc=document.getElementById('location');
   loc.innerHTML=errorMessage;
+}
+function computeDistance(startCoords,destCoords){
+  var startLatRads=degreesToRadians(startCoords.latitude);
+  var startLongRads=degreesToRadians(startCoords.longitude);
+  var destLatRads=degreesToRadians(destCoords.latitude);
+  var destLongRads=degreesToRadians(destCoords.longitude);
+  var Radius=6371;
+  var distance=Math.acos(Math.sin(startLatRads)*Math.sin(destLatRads)+
+                         Math.cos(startLatRads)*Math.cos(destLatRads)*
+                         Math.cos(startLongRads-destLongRads))*Radius;
+  return distance;
+}
+function degressdToRadians(degrees){
+  var radians=(degrees*Math.PI)/180;
+  return radians;
 }
