@@ -12,9 +12,9 @@ function displayLocation(position){
   var loc=document.getElementById('location');
   loc.innerHTML='you are at latitude:'+latitude+',longitude:'+longitude;
   var ourCoords={latitude:47.624851,longitude:-122.52099};
-  var km=computeDistance(position.coords, ourCoords);
-  var dis=document.getElementById{'distance'};
-  dis.innerHTML='You are'+km+'km form the WickedlySmart HQ';
+  var km=computeDistance(position.coords,ourCoords);
+  var dis=document.getElementById('distance');
+  dis.innerHTML='You are '+km+' km form the WickedlySmart HQ';
 }
 function displayError(error){
   var errorTypes={
