@@ -11,6 +11,7 @@ function displayLocation(position){
   var longitude=position.coords.longitude;  //从positon.coords对象得到经度
   var loc=document.getElementById('location');
   loc.innerHTML='you are at latitude:'+latitude+',longitude:'+longitude;
+  loc.innerHTML+='(with'+position.coords.accuracy+'meters accuracy)'
   var ourCoords={latitude:47.624851,longitude:-122.52099};
   var km=computeDistance(position.coords,ourCoords);
   var dis=document.getElementById('distance');
