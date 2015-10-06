@@ -56,4 +56,24 @@ function showMap(coords){
   };
   var theMap=document.getElementById('map');
   map=new google.maps.Map(theMap,mapOptions);
+  var title='Your location';
+  var content='<h1>You are here</h1>';
+  addMarker(map,googleLatAndLong,title,content);
+}
+function addMarker(map,latlong,title,content){
+  var markerOptions={
+    position:latlong,
+    map:map,
+    title:title,
+    clickable:true
+  };
+  var marker=new google.maps.Marker(markerOptions);
+  var infoWindowOptions={
+    content:content,
+    position:latlong
+  };
+  var infoWindow=new google.maps.InfoWindow(infoWindowOptions);
+  google.maps.event.addListener(marker,'click',function(){
+    infoWindow.open(map);
+  });
 }
