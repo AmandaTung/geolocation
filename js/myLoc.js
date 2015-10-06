@@ -2,8 +2,22 @@ window.onload=getMyLocation;
 function getMyLocation(){
   if(navigator.geolocation){                //判断浏览器是否支持地理定位API
     navigator.geolocation.getCurrentPosition(displayLocation,displayError); //getCurrentPosition() 方法获得用户的位置
+    var watchButton=document.getElementById('watch');
+    watchButton.onclick=watchLocation;
+    var clearWatchButton=document.getElementById('clearWatch');
+    clearWatchButton.onclick=clearWatch;
   }else{
     alert("Oops,no geolocation support");
+  }
+}
+var watchId=null;
+function watchLocation(){
+  watchId=navigator.geolocation.watchPosition(displayLocation,displayError);
+}
+function clearWatch(){
+  if(watchId){
+    navigator.geolocation.clearWatch(watchId);
+    watchId=null;
   }
 }
 function displayLocation(position){
@@ -16,7 +30,9 @@ function displayLocation(position){
   var km=computeDistance(position.coords,ourCoords);
   var dis=document.getElementById('distance');
   dis.innerHTML='You are '+km+' km from the WickedlySmart HQ';
-  showMap(position.coords);
+  if(map==null){
+    showMap(position.coords);
+  }
 }
 function displayError(error){
   var errorTypes={
@@ -47,7 +63,7 @@ function degreesToRadians(degrees){
   var radians=(degrees*Math.PI)/180;
   return radians;
 }
-var map;
+var map=null;
 function showMap(coords){
   var googleLatAndLong=new google.maps.LatLng(coords.latitude,coords.longitude);
   var mapOptions={
